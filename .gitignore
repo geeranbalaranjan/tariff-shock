@@ -6,6 +6,8 @@ __pycache__/
 *$py.class
 *.so
 .Python
+backend/.venv/
+backend/venv/
 .venv/
 venv/
 ENV/
@@ -30,6 +32,7 @@ Thumbs.db
 
 # Testing
 .pytest_cache/
+backend/.pytest_cache/
 .coverage
 htmlcov/
 
@@ -39,14 +42,17 @@ htmlcov/
 # These large raw data files should not be pushed to git
 # Only the processed/ folder is needed for the app to run
 
-data/2024_EXP_HS2/
-data/2024_EXP_HS6/
-data/2024_EXP_HS8/
-data/2024_IMP_HS2/
-data/2024_IMP_HS6/
-data/2024_IMP_HS10/
-data/Business_Supplier_Change_Data.csv
-data/Business_Supplier_Change_MetaData.csv
+backend/data/2024_EXP_HS2/
+backend/data/2024_EXP_HS6/
+backend/data/2024_EXP_HS8/
+backend/data/2024_IMP_HS2/
+backend/data/2024_IMP_HS6/
+backend/data/2024_IMP_HS10/
+backend/data/Business_Supplier_Change_Data.csv
+backend/data/Business_Supplier_Change_MetaData.csv
+backend/data/Business*.csv
+backend/data/indicators_*.csv
+backend/data/*.xlsx
 
 # Keep processed data (small, required for app)
-!data/processed/
+!backend/data/processed/
