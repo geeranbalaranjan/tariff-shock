@@ -1,5 +1,5 @@
 """
-TariffShock Risk Engine
+TradeRisk Risk Engine
 =======================
 A deterministic computation module for quantifying tariff exposure risk.
 """

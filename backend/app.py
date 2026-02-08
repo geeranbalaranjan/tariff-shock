@@ -1,5 +1,5 @@
 """
-TariffShock Application Entry Point
+TradeRisk Application Entry Point
 ===================================
 Run the Flask API server.
 """
@@ -26,7 +26,7 @@ def main():
     data_dir = sys.argv[1] if len(sys.argv) > 1 else None
     
     print("=" * 60)
-    print("TariffShock Risk Engine API")
+    print("TradeRisk Risk Engine API")
     print("=" * 60)
     print()
     

@@ -1,5 +1,5 @@
 """
-TariffShock Input Validation Schemas
+TradeRisk Input Validation Schemas
 ====================================
 Defines data validation schemas for the Risk Engine.
 """

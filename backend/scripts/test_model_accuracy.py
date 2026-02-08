@@ -435,7 +435,7 @@ def main():
     """Main function to run K-Fold evaluation."""
     print()
     print("╔═══════════════════════════════════════════════════════════════════════╗")
-    print("║      TariffShock ML Model - Accuracy Testing with K-Fold CV          ║")
+    print("║      TradeRisk ML Model - Accuracy Testing with K-Fold CV            ║")
     print("╚═══════════════════════════════════════════════════════════════════════╝")
     print()
     

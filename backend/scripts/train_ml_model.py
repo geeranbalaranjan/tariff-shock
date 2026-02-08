@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Train ML model for TariffShock
+Train ML model for TradeRisk
 ==============================
 Trains neural network on sector risk data.
 

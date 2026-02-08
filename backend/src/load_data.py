@@ -1,5 +1,5 @@
 """
-TariffShock Data Loading Module
+TradeRisk Data Loading Module
 ===============================
 Loads and preprocesses static data for the Risk Engine.
 """

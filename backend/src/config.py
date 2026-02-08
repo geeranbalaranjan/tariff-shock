@@ -1,5 +1,5 @@
 """
-TariffShock Configuration
+TradeRisk Configuration
 ========================
 Centralized configuration values loaded from environment variables.
 """
