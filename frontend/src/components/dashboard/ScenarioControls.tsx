@@ -366,18 +366,19 @@ export function ScenarioControls({
         {/* Tariff % */}
         <div className="flex flex-col">
           <span className="text-[10px] uppercase tracking-wider text-white/40 font-medium mb-0.5">Tariff %</span>
-        <input
-          type="number"
-          min={0}
-          max={25}
-          step={0.5}
-          value={scenario.tariffPercent}
-          onChange={(e) => {
-            const v = parseFloat(e.target.value);
-            if (!Number.isNaN(v)) setScenario((prev) => ({ ...prev, tariffPercent: Math.max(0, Math.min(25, v)) }));
-          }}
-          className="w-14 bg-white/5 border border-white/10 rounded text-xs text-white/90 font-mono py-1.5 px-2 focus:outline-none focus:border-white/20"
-        />
+          <input
+            type="number"
+            min={0}
+            max={25}
+            step={0.5}
+            value={scenario.tariffPercent}
+            onChange={(e) => {
+              const v = parseFloat(e.target.value);
+              if (!Number.isNaN(v)) setScenario((prev) => ({ ...prev, tariffPercent: Math.max(0, Math.min(25, v)) }));
+            }}
+            className="w-14 bg-white/5 border border-white/10 rounded text-xs text-white/90 font-mono py-1.5 px-2 focus:outline-none focus:border-white/20"
+          />
+        </div>
       </div>
 
       {/* Row 2: Partner, Sector, Actions */}
@@ -386,71 +387,71 @@ export function ScenarioControls({
         <div className="flex flex-col relative">
           <span className="text-[10px] uppercase tracking-wider text-white/40 font-medium mb-0.5">Partner</span>
           <div className="relative">
-          <button
-            type="button"
-            onClick={() => {
-              setSectorOpen(false);
-              setCustomPartnerOpen(false);
-              setPartnerOpen((o) => !o);
-            }}
-            className="flex items-center gap-1 bg-white/5 border border-white/10 rounded text-xs text-white/90 font-medium py-1.5 pl-2 pr-6 min-w-[120px] max-w-[180px] truncate focus:outline-none focus:border-white/20"
-          >
-            {partnerLabel}
-            <ChevronDown className="w-3 h-3 text-white/50 absolute right-2" />
-          </button>
-          {partnerOpen && !customPartnerOpen && (
-            <>
-              <div className="fixed inset-0 z-10" aria-hidden onClick={() => setPartnerOpen(false)} />
-              <div className="absolute top-full left-0 mt-1 z-20 bg-[#0f1419] border border-white/10 rounded-md shadow-lg py-1 min-w-[200px] max-h-[320px] overflow-auto">
-                <div className="px-2 py-1.5 text-[10px] uppercase tracking-wider text-white/40 font-medium">Top partners</div>
-                {partners.length > 0
-                  ? partners.map((p) => {
-                      const selected = scenario.targetPartners?.[0] === p.id;
-                      return (
-                        <button
-                          key={p.id}
-                          type="button"
-                          onClick={() => {
-                            setScenario((prev) => ({
-                              ...prev,
-                              targetPartners: [p.id],
-                              partnerDisplayNames: [p.name],
-                            }));
-                            setPartnerOpen(false);
-                          }}
-                          className="w-full text-left px-3 py-1.5 text-xs hover:bg-white/5 flex items-center gap-2 text-white/90"
-                        >
-                          <span className={`w-2 h-2 rounded-sm ${selected ? "bg-blue-500" : "bg-white/20"}`} />
-                          {p.name}
-                        </button>
-                      );
-                    })
-                  : TOP_PARTNERS_DISPLAY.map((name) => {
-                      const backend = toBackendPartner(name);
-                      const supported = backend !== null;
-                      return (
-                        <button
-                          key={name}
-                          type="button"
-                          onClick={() => selectPartnerByDisplayName(name)}
-                          className={`w-full text-left px-3 py-1.5 text-xs hover:bg-white/5 flex items-center gap-2 ${supported ? "text-white/90" : "text-white/50"}`}
-                        >
-                          <span className={`w-2 h-2 rounded-sm ${scenario.partnerDisplayNames?.[0] === name ? "bg-blue-500" : "bg-white/20"}`} />
-                          {name}
-                        </button>
-                      );
-                    })}
-                <div className="border-t border-white/10 my-1" />
-                <button
-                  type="button"
-                  onClick={openCustomPartner}
-                  className="w-full text-left px-3 py-1.5 text-xs text-white/70 hover:bg-white/5"
-                >
-                  Custom…
-                </button>
-              </div>
-            </>
-          )}
+            <button
+              type="button"
+              onClick={() => {
+                setSectorOpen(false);
+                setCustomPartnerOpen(false);
+                setPartnerOpen((o) => !o);
+              }}
+              className="flex items-center gap-1 bg-white/5 border border-white/10 rounded text-xs text-white/90 font-medium py-1.5 pl-2 pr-6 min-w-[120px] max-w-[180px] truncate focus:outline-none focus:border-white/20"
+            >
+              {partnerLabel}
+              <ChevronDown className="w-3 h-3 text-white/50 absolute right-2" />
+            </button>
+            {partnerOpen && !customPartnerOpen && (
+              <>
+                <div className="fixed inset-0 z-10" aria-hidden onClick={() => setPartnerOpen(false)} />
+                <div className="absolute top-full left-0 mt-1 z-20 bg-[#0f1419] border border-white/10 rounded-md shadow-lg py-1 min-w-[200px] max-h-[320px] overflow-auto">
+                  <div className="px-2 py-1.5 text-[10px] uppercase tracking-wider text-white/40 font-medium">Top partners</div>
+                  {partners.length > 0
+                    ? partners.map((p) => {
+                        const selected = scenario.targetPartners?.[0] === p.id;
+                        return (
+                          <button
+                            key={p.id}
+                            type="button"
+                            onClick={() => {
+                              setScenario((prev) => ({
+                                ...prev,
+                                targetPartners: [p.id],
+                                partnerDisplayNames: [p.name],
+                              }));
+                              setPartnerOpen(false);
+                            }}
+                            className="w-full text-left px-3 py-1.5 text-xs hover:bg-white/5 flex items-center gap-2 text-white/90"
+                          >
+                            <span className={`w-2 h-2 rounded-sm ${selected ? "bg-blue-500" : "bg-white/20"}`} />
+                            {p.name}
+                          </button>
+                        );
+                      })
+                    : TOP_PARTNERS_DISPLAY.map((name) => {
+                        const backend = toBackendPartner(name);
+                        const supported = backend !== null;
+                        return (
+                          <button
+                            key={name}
+                            type="button"
+                            onClick={() => selectPartnerByDisplayName(name)}
+                            className={`w-full text-left px-3 py-1.5 text-xs hover:bg-white/5 flex items-center gap-2 ${supported ? "text-white/90" : "text-white/50"}`}
+                          >
+                            <span className={`w-2 h-2 rounded-sm ${scenario.partnerDisplayNames?.[0] === name ? "bg-blue-500" : "bg-white/20"}`} />
+                            {name}
+                          </button>
+                        );
+                      })}
+                  <div className="border-t border-white/10 my-1" />
+                  <button
+                    type="button"
+                    onClick={openCustomPartner}
+                    className="w-full text-left px-3 py-1.5 text-xs text-white/70 hover:bg-white/5"
+                  >
+                    Custom…
+                  </button>
+                </div>
+              </>
+            )}
         </div>
         {customPartnerOpen && (
           <>
