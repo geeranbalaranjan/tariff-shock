@@ -407,6 +407,9 @@ def create_final_dataset(exports_df, imports_df, supplier_df):
     # Calculate risk scores
     final_df = calculate_risk_score(final_df)
     
+    # Add tariff_percent column for ML training (baseline scenario = 10%)
+    final_df['tariff_percent'] = 10.0
+    
     # Add scenario simulation columns (baseline = 10% US tariff)
     final_df = simulate_tariff_scenario(final_df, tariff_pct=10, target_partner='US')
     
@@ -419,7 +422,7 @@ def create_final_dataset(exports_df, imports_df, supplier_df):
         'export_value', 'import_value', 'trade_balance', 'total_trade', 'export_ratio',
         'exposure_us', 'exposure_cn', 'exposure_mx', 'exposure_jp', 'exposure_de', 'exposure_gb',
         'hhi_concentration', 'top_partner', 'top_partner_name', 'top_partner_share',
-        'risk_score', 'shocked_risk_score', 'risk_delta', 'affected_export_value'
+        'tariff_percent', 'risk_score', 'shocked_risk_score', 'risk_delta', 'affected_export_value'
     ]
     
     # Only keep columns that exist

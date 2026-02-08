@@ -189,6 +189,7 @@ class BackboardDataLayer:
                 continue
 
             features = {
+                "tariff_percent": scenario_input.tariff_percent,
                 "exposure_us": sector.partner_shares.get("US", 0),
                 "exposure_cn": sector.partner_shares.get("China", 0),
                 "exposure_mx": sector.partner_shares.get("Mexico", 0),

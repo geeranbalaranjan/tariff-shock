@@ -36,7 +36,7 @@ cxc/
 ├── .gitignore                  # Ignores raw data (local only)
 ├── data/
 │   ├── processed/              # Preprocessed datasets (tracked in git)
-│   │   ├── sector_risk_dataset.csv     # 98 sectors, 21 features
+│   │   ├── sector_risk_dataset.csv     # 98 sectors, 22 features (incl. tariff_percent)
 │   │   ├── partner_trade_data.csv      # Trade by partner
 │   │   └── supplier_change_data.csv    # Industry supplier changes
 │   ├── 2024_EXP_HS2/           # Raw export data (LOCAL ONLY - not in git)
@@ -141,11 +141,20 @@ Where:
 ## 🤖 ML Model Performance
 
 ### Architecture
-- **Input**: 6 features (sector exposure metrics)
+- **Input**: 7 features (sector exposure metrics + tariff percent)
 - **Layers**: 64 → 32 → 16 neurons with 20% and 15% dropout
 - **Output**: Risk score (0-100, via sigmoid activation)
 - **Training**: 120 epochs, batch size 16, 20% validation split
 - **Early Stopping**: Patience=15 on validation loss
+
+### Input Features (Updated Feb 7, 2026)
+1. `tariff_percent` — Tariff shock percentage (0-25) **[NEW]**
+2. `exposure_us` — US exposure (0-1)
+3. `exposure_cn` — China exposure (0-1)
+4. `exposure_mx` — Mexico exposure (0-1)
+5. `hhi_concentration` — HHI concentration (0-1)
+6. `export_value` — Total exports (dollars)
+7. `top_partner_share` — Top partner concentration (0-1)
 
 ### Training Set Results
 - **MAE**: 1.464 points (±1.5 error on average)
@@ -214,11 +223,27 @@ Where:
 
 ## 🔜 Next Steps / TODO
 
-### High Priority
-- [ ] Run final model training: `python scripts/train_ml_model.py`
+### High Priority - ML Model Training (GPU Required)
+- [ ] **Train ML model on GPU machine**: The model now includes `tariff_percent` as an input feature (7 total features)
+- [ ] Training command: `python scripts/train_ml_model.py`
 - [ ] Verify model saved to `models/tariff_risk_nn/`
+- [ ] Copy trained model back to this machine for inference
 - [ ] Test ML endpoints: `/api/predict-ml` and `/api/predict-ml-batch`
-- [ ] Integrate ML predictions into Flask app (if not already done)
+
+**Training Requirements:**
+- TensorFlow/Keras with GPU support recommended
+- Dataset already regenerated with `tariff_percent` column
+- Expected training time: ~2-5 minutes on GPU, 15-30 minutes on CPU
+- Model will be saved to `models/tariff_risk_nn/` (both `model.h5` and `scaler.pkl`)
+
+**New ML Model Features (7 inputs):**
+1. `tariff_percent` (0-25) — NEW: enables tariff-aware predictions
+2. `exposure_us` (0-1)
+3. `exposure_cn` (0-1)
+4. `exposure_mx` (0-1)
+5. `hhi_concentration` (0-1)
+6. `export_value` (dollars)
+7. `top_partner_share` (0-1)
 
 ### Medium Priority
 - [ ] Frontend visualization (React/D3.js) showing ML vs deterministic predictions

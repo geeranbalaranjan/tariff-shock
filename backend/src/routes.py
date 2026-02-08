@@ -427,6 +427,7 @@ def create_app(data_dir: Optional[str] = None) -> Flask:
         
         Expected JSON:
         {
+            "tariff_percent": float (0-25),
             "exposure_us": float (0-1),
             "exposure_cn": float (0-1),
             "exposure_mx": float (0-1),
@@ -497,12 +498,14 @@ def create_app(data_dir: Optional[str] = None) -> Flask:
                 return jsonify({"error": "No sectors provided"}), 400
             
             engine: RiskEngine = app.config['RISK_ENGINE']
+            tariff_percent = data.get('tariff_percent', 10.0)
             
             results = []
             for sector_id in sectors:
                 sector = engine.data_loader.get_sector(sector_id)
                 if sector:
                     features = {
+                        'tariff_percent': tariff_percent,
                         'exposure_us': sector.partner_shares.get('US', 0),
                         'exposure_cn': sector.partner_shares.get('China', 0),
                         'exposure_mx': sector.partner_shares.get('Mexico', 0),

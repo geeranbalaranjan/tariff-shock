@@ -99,6 +99,7 @@ class TariffRiskNN:
         
         # Select features for the model
         feature_cols = [
+            'tariff_percent',   # Tariff shock percentage (0-25)
             'exposure_us',      # US exposure (0-1)
             'exposure_cn',      # China exposure (0-1)
             'exposure_mx',      # Mexico exposure
@@ -198,6 +199,7 @@ class TariffRiskNN:
         
         # Build feature vector in correct order
         feature_vector = np.array([
+            features.get('tariff_percent', 0.0),
             features.get('exposure_us', 0.0),
             features.get('exposure_cn', 0.0),
             features.get('exposure_mx', 0.0),
